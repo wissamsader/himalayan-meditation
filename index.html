@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Himalayan Meditation — a Vedic mantra practice</title>
+<meta name="description" content="A quiet Vedic mantra meditation app. A mantra of your own, a gong to begin, twenty minutes of stillness — morning and evening. Free on Google Play.">
+<link rel="canonical" href="https://himalayanmeditation.space/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://himalayanmeditation.space/">
+<meta property="og:site_name" content="Himalayan Meditation">
+<meta property="og:title" content="Himalayan Meditation — a Vedic mantra practice">
+<meta property="og:description" content="A mantra of your own. Twenty minutes of stillness, morning and evening. Free on Google Play.">
+<meta property="og:image" content="https://himalayanmeditation.space/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Himalayan Meditation — a Vedic mantra practice">
+<meta name="twitter:description" content="A mantra of your own. Twenty minutes of stillness, morning and evening. Free on Google Play.">
+<meta name="twitter:image" content="https://himalayanmeditation.space/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Himalayan Meditation",
+  "operatingSystem": "Android",
+  "applicationCategory": "HealthApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "A quiet Vedic mantra meditation app. A mantra of your own, a gong to begin, twenty minutes of stillness — morning and evening.",
+  "url": "https://himalayanmeditation.space/",
+  "installUrl": "https://play.google.com/store/apps/details?id=app.himalayanmeditation.vedic"
+}
+</script>
+<meta name="theme-color" content="#F1EADD">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F1EADD; --gold:#F5A623; --amber:#f3982e; --terracotta:#C85A3A; --burnt:#db6c2b;
+  --blue:#6B9FD4; --lavender:#B8A0D8; --yellow:#F0C040;
+  --ink:#2c2822; --ink-soft:#4a453d; --muted:#8a8172; --brown:#8B6F5E;
+  --line:rgba(44,40,34,.10);
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --serif:'Newsreader',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  color:var(--ink); font-family:var(--sans); font-weight:400; line-height:1.75;
+  overflow-x:clip; max-width:100vw; -webkit-font-smoothing:antialiased;
+  background:var(--cream);
+}
+::selection{background:rgba(245,166,35,.26)}
+a{color:inherit;text-decoration:none}
+
+/* ── full, warm background wash (fills the whole frame — no empty cream) ── */
+.bg{position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(58vw 58vw at 10% 4%, rgba(245,166,35,.30), transparent 62%),
+    radial-gradient(52vw 52vw at 96% 22%, rgba(200,90,58,.22), transparent 60%),
+    radial-gradient(60vw 60vw at 84% 96%, rgba(184,160,216,.30), transparent 62%),
+    radial-gradient(50vw 50vw at 14% 92%, rgba(240,192,64,.24), transparent 60%),
+    radial-gradient(46vw 46vw at 54% 52%, rgba(233,150,138,.14), transparent 60%),
+    linear-gradient(168deg,#F4EEE3 0%,#F0E7D9 46%,#ECDFE4 100%);
+  animation:bgShift 26s ease-in-out infinite;
+}
+@keyframes bgShift{0%,100%{filter:hue-rotate(-8deg) saturate(1)}50%{filter:hue-rotate(10deg) saturate(1.08)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── top bar ── */
+.topnav{position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:15px 28px;
+  border-bottom:1px solid transparent;
+  transition:background .45s,border-color .45s,backdrop-filter .45s;
+}
+.topnav.scrolled{background:rgba(243,237,226,.72);border-bottom-color:var(--line);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.topnav .brand{display:flex;align-items:center;gap:11px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink)}
+.topnav .brand img{width:27px;height:27px;border-radius:8px;box-shadow:0 4px 12px -4px rgba(90,55,20,.4)}
+.topnav .links{display:flex;gap:26px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brown)}
+.topnav .links a{transition:color .3s}
+.topnav .links a:hover{color:var(--terracotta)}
+.topnav .cta{font-size:10px;letter-spacing:.2em;text-transform:uppercase;background:var(--ink);color:var(--cream);
+  padding:10px 20px;border-radius:999px;white-space:nowrap;transition:transform .3s,box-shadow .3s}
+.topnav .cta:hover{transform:translateY(-2px);box-shadow:0 14px 28px -12px rgba(44,40,34,.5)}
+
+/* shared */
+.eyebrow{font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:var(--brown);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before,.eyebrow::after{content:'';height:1px;width:26px;background:currentColor;opacity:.4}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.serif-h{font-family:var(--serif);font-weight:300;font-style:italic}
+
+/* ── hero ── */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14vh 24px 8vh}
+.sun-halo{position:absolute;top:34%;left:50%;transform:translate(-50%,-50%);width:min(78vh,640px);aspect-ratio:1;z-index:0;pointer-events:none}
+.sun-halo .glow{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,166,35,.52),rgba(240,150,90,.2) 40%,transparent 68%);
+  animation:pulse 8s ease-in-out infinite}
+/* the icon's aura — warm red left, lavender right */
+.sun-halo .g2{position:absolute;left:-4%;top:36%;width:56%;height:56%;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,90,58,.30),transparent 66%);animation:pulse 9.5s ease-in-out 1.2s infinite}
+.sun-halo .g3{position:absolute;right:-4%;top:42%;width:56%;height:56%;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,160,216,.36),transparent 66%);animation:pulse 10.5s ease-in-out 2.1s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
+
+.figure-wrap{position:relative;z-index:2;margin-bottom:44px}
+.figure-wrap svg{width:clamp(96px,15vh,140px);height:auto;display:block;filter:drop-shadow(0 18px 30px rgba(90,55,20,.22));animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.wordmark{position:relative;z-index:2}
+.wordmark .h{font-size:clamp(2.3rem,6.4vw,4rem);font-weight:300;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);padding-left:.32em;line-height:1.05}
+.wordmark .m{font-size:clamp(.82rem,2vw,1.1rem);font-weight:300;letter-spacing:.6em;text-transform:uppercase;color:var(--muted);padding-left:.6em;margin-top:14px}
+.hero .sub{position:relative;z-index:2;font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(1.05rem,2.3vw,1.45rem);color:var(--brown);max-width:30ch;margin:28px auto 34px}
+.hero .actions{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:14px}
+.play{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--cream);padding:15px 30px;border-radius:999px;box-shadow:0 20px 44px -18px rgba(44,40,34,.6);transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.play:hover{transform:translateY(-3px);box-shadow:0 30px 54px -18px rgba(44,40,34,.5)}
+.play svg{width:22px;height:22px}
+.play .t{text-align:left;line-height:1.15}
+.play .t small{display:block;font-size:8px;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
+.play .t b{font-weight:500;font-size:16px;letter-spacing:.03em}
+.hero .free{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
+.scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scrollcue .dot{width:5px;height:5px;border-radius:50%;background:var(--terracotta);animation:sink 2.6s ease-in-out infinite}
+@keyframes sink{0%,100%{transform:translateY(-5px);opacity:.4}50%{transform:translateY(5px);opacity:1}}
+
+/* ── section frame ── */
+.sec{max-width:1080px;margin:0 auto;padding:12vh 34px}
+.sec-center{text-align:center;display:flex;flex-direction:column;align-items:center}
+.sec h2{font-size:clamp(1.7rem,4vw,2.7rem);font-weight:300;letter-spacing:.01em;line-height:1.25;color:var(--ink);margin:22px 0 16px;max-width:22ch}
+.sec h2 em{font-family:var(--serif);font-style:italic;color:var(--terracotta)}
+.sec .lead{font-size:15px;color:var(--brown);max-width:46ch;line-height:1.9}
+
+/* ── app tour (phone) ── */
+.tour{display:flex;gap:clamp(34px,6vw,84px);align-items:center;justify-content:center;margin-top:7vh;flex-wrap:wrap}
+.phone{flex:0 0 auto;width:296px;border-radius:48px;border:9px solid #262019;background:#262019;
+  box-shadow:0 60px 100px -44px rgba(70,45,15,.6),0 26px 52px -30px rgba(70,45,15,.42)}
+.screen{position:relative;border-radius:39px;overflow:hidden;background:#F0EBE1;padding:30px 22px 0;height:604px;display:flex;flex-direction:column;text-align:left}
+.screen > *{position:relative}
+/* home screen, exactly as the app's current build */
+.ph-gear{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.45);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:grid;place-items:center;z-index:3}
+.ph-gear svg{width:13px;height:13px;stroke:#2a2a2a;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ph-hero{height:98px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.ph-aura{position:absolute;left:50%;top:50%;width:132px;height:132px;transform:translate(-50%,-50%);border-radius:50%;
+  filter:blur(26px);pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 28%,rgba(245,188,92,.85),transparent 55%),
+    radial-gradient(circle at 78% 62%,rgba(184,150,216,.8),transparent 58%),
+    radial-gradient(circle at 22% 60%,rgba(233,150,138,.7),transparent 55%);
+  animation:hueCyc 14s ease-in-out infinite}
+@keyframes hueCyc{0%,100%{filter:blur(26px) hue-rotate(-20deg)}50%{filter:blur(26px) hue-rotate(24deg)}}
+.ph-fig{position:relative;width:55px;height:auto;z-index:1}
+.ph-eyebrow{font-size:8px;letter-spacing:.22em;color:#8a8378;margin:8px 0 9px;text-transform:uppercase}
+.ph-suns{display:flex;gap:10px}
+.ph-sun{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px}
+.pm-mini{position:relative;width:58px;height:58px}
+.pm-rays{position:absolute;left:50%;top:50%;width:58px;height:58px;transform:translate(-50%,-50%);border-radius:50%;
+  background:repeating-conic-gradient(rgba(244,164,58,.95) 0deg 5deg,transparent 5deg 30deg);
+  -webkit-mask:radial-gradient(circle,transparent 20px,#000 21px);mask:radial-gradient(circle,transparent 20px,#000 21px);
+  animation:pmSpin 120s linear infinite}
+@keyframes pmSpin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.pm-sun{position:absolute;left:50%;top:50%;width:36px;height:36px;transform:translate(-50%,-50%);border-radius:50%;
+  background:#f3982e;box-shadow:0 0 14px rgba(243,152,46,.4);animation:breatheC 4.5s ease-in-out infinite}
+.pm-sun.emb{background:#db6c2b;width:33px;height:33px;box-shadow:0 0 14px rgba(219,108,43,.45)}
+.pm-line{position:absolute;left:50%;top:73%;width:52px;height:1.5px;transform:translateX(-50%);border-radius:2px;
+  background:linear-gradient(90deg,transparent,rgba(232,160,90,.9) 30%,rgba(245,190,130,1) 50%,rgba(232,160,90,.9) 70%,transparent)}
+.pm-halo{position:absolute;left:50%;top:50%;width:54px;height:54px;transform:translate(-50%,-50%);border-radius:50%;
+  border:1.5px solid rgba(201,134,47,.5);animation:pmHalo 5s ease-out infinite}
+@keyframes pmHalo{0%{transform:translate(-50%,-50%) scale(.8);opacity:.7}100%{transform:translate(-50%,-50%) scale(1.5);opacity:0}}
+.pm-badge{position:absolute;top:0;right:2px;width:15px;height:15px;border-radius:50%;background:#eccf95;
+  box-shadow:0 2px 6px rgba(90,70,50,.28);display:flex;align-items:center;justify-content:center;z-index:2}
+.pm-badge svg{width:9px;height:9px}
+.pm-badge path{fill:none;stroke:rgba(70,55,45,.92);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.pm-cap{text-align:center}
+.pm-cap b{display:block;font-size:10.5px;font-weight:600;letter-spacing:.03em;color:#16161a}
+.ph-sun.done .pm-cap b{color:#b9712f}
+.pm-cap small{font-size:8px;color:#8a8378}
+.ph-chev{margin-top:6px;text-align:center}
+.ph-chev svg{width:24px;height:auto;display:block;margin:0 auto}
+.ph-chev path{fill:none;stroke:#d98a2b;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ph-chev span{font-size:7.5px;color:#d98a2b;letter-spacing:.04em}
+.ph-label{font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:rgba(26,26,26,.5);margin:14px 0 5px}
+.ph-begin{font-family:system-ui,-apple-system,sans-serif;font-size:27px;line-height:1.08;letter-spacing:.02em;color:#1a1a1a}
+.ph-begin::before{content:'';position:absolute;left:34%;top:50%;width:150px;height:150px;transform:translate(-50%,-50%);
+  border-radius:50%;background:radial-gradient(circle,rgba(240,192,64,.9),transparent 70%);filter:blur(22px);z-index:0}
+.ph-begin .txt{position:relative;z-index:1;display:block}
+.ph-begin .arr{display:inline-block;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.ph-mantra{font-family:system-ui,-apple-system,sans-serif;font-size:23px;letter-spacing:.24em;color:#1a1a1a}
+.ph-mantra::before{content:'';position:absolute;left:30%;top:50%;width:130px;height:130px;transform:translate(-50%,-50%);
+  border-radius:50%;background:radial-gradient(circle,rgba(184,160,216,.85),transparent 70%);filter:blur(22px);z-index:0}
+.ph-mantra .txt{position:relative;z-index:1}
+.ph-quote{font-family:Georgia,serif;font-style:italic;font-size:11.5px;color:#2a2a2a;line-height:1.55}
+.ph-nav{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:15px 2px 16px;border-top:1px solid rgba(44,40,34,.12)}
+.ph-nav span{font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:#8a8172}
+.ph-nav span.on{color:#b3801f;font-weight:600}
+.tour-notes{list-style:none;max-width:330px;text-align:left}
+.tour-notes li{padding:17px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--brown);line-height:1.7}
+.tour-notes li:last-child{border-bottom:1px solid var(--line)}
+.tour-notes b{display:block;font-weight:600;color:var(--ink);font-size:14.5px;margin-bottom:3px}
+
+/* ── gong ── */
+.gong-stage{position:relative;display:grid;place-items:center;width:min(66vw,340px);aspect-ratio:1;margin:6vh 0 5vh;cursor:pointer}
+.gong-stage .warm{position:absolute;width:96%;height:96%;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,166,35,.42),rgba(219,108,43,.18) 46%,transparent 68%);
+  animation:pulse 7s ease-in-out infinite}
+.ripple{position:absolute;width:70%;height:70%;border-radius:50%;border:1.5px solid rgba(219,108,43,.5);opacity:0;pointer-events:none}
+.ripple.auto{animation:rip 6s ease-out infinite}
+.ripple.auto.b{animation-delay:3s}
+@keyframes rip{0%{transform:scale(.9);opacity:0}14%{opacity:.5}100%{transform:scale(1.9);opacity:0}}
+.gong-img{width:82%;height:auto;position:relative;z-index:2;transition:transform .1s ease;
+  filter:drop-shadow(0 20px 40px rgba(150,95,30,.34))}
+.gong-stage:hover .gong-img{transform:scale(1.02)}
+.gong-stage.struck .gong-img{transform:scale(.95)}
+.tap-hint{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--burnt);display:flex;align-items:center;gap:8px}
+.tap-hint svg{width:14px;height:14px}
+@keyframes strike-ring{0%{transform:scale(1);opacity:.85}100%{transform:scale(2.3);opacity:0}}
+.strike{position:absolute;width:70%;height:70%;border-radius:50%;border:2px solid rgba(219,108,43,.7);opacity:0;pointer-events:none}
+.strike.go{animation:strike-ring 1.6s ease-out forwards}
+
+/* ── mantra card ── */
+.mantra-card{position:relative;width:100%;max-width:440px;margin:6vh auto 3vh;padding:42px 30px 38px;text-align:center;
+  background:rgba(255,253,249,.72);border:1px solid rgba(255,255,255,.7);border-radius:26px;
+  box-shadow:0 30px 70px -30px rgba(120,80,30,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.mantra-card .mlabel{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.mantra-card .mw{font-size:clamp(2rem,6vw,2.7rem);font-weight:300;letter-spacing:.34em;color:var(--ink);padding-left:.34em;line-height:1.2;transition:opacity .5s}
+.mantra-card .mp{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--terracotta);margin-top:10px;transition:opacity .5s}
+.mantra-card .mg{font-size:12.5px;color:var(--muted);margin-top:6px;min-height:1.7em;transition:opacity .5s}
+
+/* ── sessions (suns) ── */
+.sessions{display:flex;gap:clamp(24px,6vw,80px);margin:7vh 0 2vh;flex-wrap:wrap;justify-content:center}
+.session{display:flex;flex-direction:column;align-items:center;gap:18px;width:190px}
+.mini{position:relative;width:118px;height:118px}
+/* flat solid discs + exact colours, matching the app; breatheC keeps the centering transform */
+.mini .disc{position:absolute;left:50%;top:50%;width:74px;height:74px;transform:translate(-50%,-50%);border-radius:50%;
+  background:#f3982e;box-shadow:0 0 26px rgba(243,152,46,.45);animation:breatheC 4.5s ease-in-out infinite}
+.mini .disc.emb{background:#db6c2b;box-shadow:0 0 26px rgba(219,108,43,.5);width:70px;height:70px}
+.mini .horizon{position:absolute;left:50%;top:74%;width:106px;height:2px;transform:translateX(-50%);border-radius:2px;
+  background:linear-gradient(90deg,transparent,rgba(232,160,90,.9) 30%,rgba(245,190,130,1) 50%,rgba(232,160,90,.9) 70%,transparent)}
+@keyframes breatheC{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.05)}}
+.session .cap .t{font-size:16px;font-weight:600;color:var(--ink);letter-spacing:.02em}
+.session .cap .s{font-size:12px;color:var(--muted);margin-top:3px}
+
+/* ── teacher chat mockup ── */
+.panel{width:100%;max-width:520px;background:rgba(255,253,249,.72);border:1px solid rgba(255,255,255,.7);
+  border-radius:26px;padding:26px;margin:6vh 0 2vh;text-align:left;
+  box-shadow:0 30px 70px -30px rgba(120,80,30,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.chat-row{display:flex;gap:12px;margin-bottom:18px;align-items:flex-end}
+.chat-row.me{flex-direction:row-reverse}
+.avatar{flex:0 0 auto;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 35%,#f6b45e,#db6c2b);box-shadow:0 6px 16px -6px rgba(219,108,43,.7)}
+.avatar svg{width:22px;height:auto}
+.bubble{padding:13px 16px;border-radius:18px;font-size:14px;line-height:1.6;max-width:78%}
+.bubble.q{background:var(--ink);color:#f3ede2;border-bottom-right-radius:5px}
+.bubble.a{background:#fff;color:var(--ink-soft);border-bottom-left-radius:5px;box-shadow:0 6px 20px -10px rgba(120,80,30,.4)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{font-size:12px;color:var(--brown);background:rgba(200,90,58,.08);border:1px solid rgba(200,90,58,.18);border-radius:999px;padding:7px 13px}
+
+/* ── learn (6 free lessons) ── */
+.freepill{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);background:rgba(200,90,58,.1);border:1px solid rgba(200,90,58,.22);border-radius:999px;padding:7px 15px;margin-top:22px}
+.lessons{width:100%;max-width:400px;margin:6vh auto 2vh;text-align:left;display:flex;flex-direction:column}
+.lesson{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:20px 4px;border-top:1px solid var(--line);align-items:baseline}
+.lesson:last-child{border-bottom:1px solid var(--line)}
+.lesson .ln{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--terracotta);line-height:1;text-align:right}
+.lesson h4{font-size:16px;font-weight:500;color:var(--ink);margin-bottom:5px;letter-spacing:.01em;line-height:1.4}
+.lesson p{font-size:13px;color:var(--brown);line-height:1.65}
+
+/* ── progress ── */
+.prog-wrap{width:100%;max-width:560px;margin:6vh 0 2vh;display:flex;flex-direction:column;align-items:center;gap:30px}
+.streak{display:flex;align-items:baseline;gap:12px}
+.streak .n{font-size:clamp(3rem,9vw,5rem);font-weight:300;line-height:1;
+  background:linear-gradient(120deg,var(--gold),var(--terracotta) 55%,var(--lavender));-webkit-background-clip:text;background-clip:text;color:transparent}
+.streak .l{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);max-width:8ch;text-align:left}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;width:100%;max-width:322px}
+.cell{aspect-ratio:1;border-radius:50%}
+.legend{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;justify-content:center;max-width:322px;font-size:11px;color:var(--muted)}
+.legend .ld{width:11px;height:11px;border-radius:50%;flex-shrink:0;display:inline-block}
+.legend .grp{display:flex;align-items:center;gap:6px}
+.badges{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.badge2{display:flex;flex-direction:column;align-items:center;gap:8px;width:84px}
+.badge2 .ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:22px;box-shadow:0 10px 24px -10px rgba(120,80,30,.5)}
+.badge2 .nm{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+
+/* ── feature grid ── */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);width:100%;max-width:960px;margin:7vh auto 0;
+  border:1px solid var(--line);border-radius:24px;overflow:hidden;background:rgba(255,253,249,.44)}
+.gcell{padding:28px 27px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-align:left}
+.gcell:nth-child(3n){border-right:0}
+.gcell:nth-child(n+7){border-bottom:0}
+.gcell h5{font-size:13.5px;font-weight:600;letter-spacing:.04em;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:9px}
+.gcell h5 i{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.gcell p{font-size:12.5px;color:var(--brown);line-height:1.7}
+
+/* ── faq ── */
+.faq{width:100%;max-width:640px;margin:6vh auto 0;text-align:left}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:19px 4px;
+  font-family:var(--serif);font-size:17.5px;font-weight:400;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq .pm{font-size:22px;font-weight:300;color:var(--terracotta);line-height:1;transition:transform .3s;flex-shrink:0}
+.faq details[open] .pm{transform:rotate(45deg)}
+.faq details p{padding:0 4px 20px;font-size:13.5px;color:var(--brown);line-height:1.85;max-width:56ch}
+
+/* ── teaching ── */
+.teaching{min-height:70svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12vh 28px}
+.teaching .om{font-family:var(--serif);font-size:38px;color:var(--terracotta);opacity:.42;margin-bottom:26px}
+.teaching blockquote{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(1.5rem,3.8vw,2.6rem);line-height:1.36;color:var(--ink);max-width:22ch;transition:opacity .9s}
+.teaching .label{margin-top:30px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+
+/* ── download ── */
+.download{min-height:86svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12vh 28px;position:relative;overflow:hidden}
+.download .appmark{width:74px;height:74px;border-radius:20px;box-shadow:0 20px 40px -16px rgba(90,55,20,.45);margin-bottom:30px}
+.download .h{font-size:clamp(2rem,5.4vw,3.2rem);font-weight:300;letter-spacing:.24em;text-transform:uppercase;padding-left:.24em;margin-bottom:16px;color:var(--ink)}
+.download .p{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--brown);font-size:clamp(1.05rem,2.2vw,1.4rem);margin-bottom:5vh;max-width:26ch}
+.download .free{margin-top:24px;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
+.coffee{display:inline-flex;align-items:center;gap:13px;background:var(--terracotta);color:var(--cream);padding:16px 32px;border-radius:999px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;box-shadow:0 20px 44px -16px rgba(200,90,58,.7);transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,background .3s}
+.coffee:hover{transform:translateY(-3px);background:var(--burnt);box-shadow:0 30px 54px -16px rgba(200,90,58,.6)}
+.coffee svg{width:19px;height:19px;fill:currentColor}
+.download .coffee{margin-top:44px}
+.download .coffee-note{margin-top:16px;font-family:var(--serif);font-style:italic;font-weight:300;font-size:.94rem;color:var(--muted)}
+.hero .coffee{padding:13px 26px;font-size:11px}
+
+footer{padding:40px 34px calc(40px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+footer .brand{letter-spacing:.34em;color:var(--brown)}
+footer a:hover{color:var(--terracotta)}
+
+@media (max-width:760px){
+  .topnav .links{display:none}
+  .grid{grid-template-columns:1fr}
+  .gcell{border-right:0 !important}
+  .gcell:nth-child(n+7){border-bottom:1px solid var(--line)}
+  .gcell:last-child{border-bottom:0}
+}
+@media (max-width:640px){
+  .sec{padding:10vh 20px}
+  .topnav{padding:13px 18px}
+  .wordmark .h{letter-spacing:.2em;padding-left:.2em}
+  .wordmark .m{letter-spacing:.4em;padding-left:.4em}
+  .hero .sub{font-size:1.12rem;max-width:24ch}
+  .tour{gap:40px}
+  .phone{width:280px}
+  .screen{height:576px;padding:30px 22px 0}
+  .gong-stage{width:76vw}
+  .sessions{gap:20px}
+  .session{width:132px}
+  .mini{width:104px;height:104px}
+  .mini .disc{width:74px;height:74px}
+  .mini .disc.emb{width:70px;height:70px}
+  .mini .horizon{width:90px}
+  .panel{padding:20px;border-radius:20px}
+  .bubble{max-width:84%;font-size:13px}
+  .lesson{grid-template-columns:26px 1fr;gap:12px;padding:16px 2px}
+  .lesson .ln{font-size:17px}
+  .lesson h4{font-size:15px}
+  .cal{gap:3.5px;max-width:300px}
+  .streak .n{font-size:3.4rem}
+  .badges{gap:10px}
+  .badge2{width:76px}
+  .badge2 .ic{width:48px;height:48px}
+  .faq summary{font-size:16px}
+  footer{flex-direction:column;gap:12px;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="grain"></div>
+
+<!-- ── NAV ── -->
+<nav class="topnav" id="topnav">
+  <a class="brand" href="#top"><img src="favicon.png" alt="">Himalayan</a>
+  <div class="links">
+    <a href="#app">the app</a>
+    <a href="#practice">the practice</a>
+    <a href="#lessons">lessons</a>
+    <a href="#faq">questions</a>
+  </div>
+  <a class="cta" href="#get">get it free</a>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero" id="top">
+  <div class="sun-halo"><div class="glow"></div><div class="g2"></div><div class="g3"></div></div>
+  <div class="figure-wrap">
+    <svg viewBox="0 0 200 330" aria-label="Meditating figure">
+      <path d="M64,168 C64,118 136,118 136,168 L166,300 Q168,312 156,312 L44,312 Q32,312 34,300 Z" fill="#1c1a17"/>
+      <circle cx="100" cy="66" r="42" fill="#1c1a17"/>
+      <ellipse cx="100" cy="258" rx="33" ry="12" fill="#d7d1c4" opacity="0.9"/>
+    </svg>
+  </div>
+  <div class="wordmark">
+    <div class="h">Himalayan</div>
+    <div class="m">Meditation</div>
+  </div>
+  <p class="sub">A mantra of your own. Twenty minutes of stillness, morning and evening.</p>
+  <div class="actions">
+    <a class="play" href="https://play.google.com/store/apps/details?id=app.himalayanmeditation.vedic" target="_blank" rel="noopener">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><path fill="#EA4335" d="M325 256 79 22c-6-6-14-9-22-8l268 268z"/><path fill="#34A853" d="M79 490c-8 1-16-2-22-8l246-234 62 62z"/><path fill="#FBBC04" d="M325 256l63-63 84 48c18 10 18 30 0 40l-84 47z"/><path fill="#4285F4" d="M57 14c-4 5-6 11-6 19v446c0 8 2 14 6 19l246-234z"/></svg>
+      <span class="t"><small>Get it on</small><b>Google Play</b></span>
+    </a>
+    <a class="coffee" href="https://buymeacoffee.com/wissamsader" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 6h12v6.5A4.5 4.5 0 0 1 11.5 17h-3A4.5 4.5 0 0 1 4 12.5V6z"/>
+        <path d="M16 7.5h1.25A2.75 2.75 0 0 1 20 10.25 2.75 2.75 0 0 1 17.25 13H16v-1.8h1.25a.95.95 0 0 0 .95-.95.95.95 0 0 0-.95-.95H16V7.5z"/>
+        <rect x="3" y="19" width="14" height="1.7" rx=".85"/>
+      </svg>
+      <span>buy me a coffee</span>
+    </a>
+    <span class="free">free · android · no ads</span>
+  </div>
+  <div class="scrollcue"><span>scroll</span><span class="dot"></span></div>
+</header>
+
+<!-- ── APP TOUR ── -->
+<section class="sec sec-center" id="app">
+  <div class="eyebrow reveal">inside the app</div>
+  <h2 class="reveal">Your whole practice, <em>on one quiet screen</em>.</h2>
+  <div class="tour reveal">
+    <div class="phone" aria-label="Himalayan Meditation app home screen">
+      <div class="screen">
+        <div class="ph-gear"><svg viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="ph-hero">
+          <div class="ph-aura"></div>
+          <svg class="ph-fig" viewBox="0 0 200 330" aria-hidden="true">
+            <ellipse cx="47" cy="311" rx="13" ry="9" fill="#0d0d0f"/>
+            <ellipse cx="153" cy="311" rx="13" ry="9" fill="#0d0d0f"/>
+            <path d="M64,168 C64,118 136,118 136,168 L166,300 Q168,312 156,312 L44,312 Q32,312 34,300 Z" fill="#0d0d0f"/>
+            <ellipse cx="100" cy="252" rx="38" ry="21" fill="#b9bcc2"/>
+            <circle cx="100" cy="66" r="42" fill="#0d0d0f"/>
+          </svg>
+        </div>
+        <div class="ph-eyebrow">Today's sessions</div>
+        <div class="ph-suns">
+          <div class="ph-sun done">
+            <div class="pm-mini">
+              <div class="pm-rays"></div><div class="pm-sun"></div>
+              <span class="pm-badge"><svg viewBox="0 0 14 14"><path d="M3.5 7.3 l2.3 2.3 l4.7 -5.3"/></svg></span>
+            </div>
+            <div class="pm-cap"><b>Morning</b><small>Before breakfast</small></div>
+          </div>
+          <div class="ph-sun">
+            <div class="pm-mini">
+              <span class="pm-halo"></span><div class="pm-sun emb"></div><div class="pm-line"></div>
+            </div>
+            <div class="pm-cap"><b>Afternoon</b><small>Before dinner</small></div>
+          </div>
+        </div>
+        <div class="ph-chev"><svg viewBox="0 0 44 26"><path d="M10 8 L22 19 L34 8"/></svg><span>tap a sun when done</span></div>
+        <div class="ph-label">Begin</div>
+        <div class="ph-begin"><span class="txt">20-Minute<br>Session <span class="arr">→</span></span></div>
+        <div class="ph-label">Your mantra</div>
+        <div class="ph-mantra"><span class="txt">IENGA</span></div>
+        <div class="ph-label">Today's teaching</div>
+        <div class="ph-quote">"The kingdom of Heaven is within you."</div>
+        <nav class="ph-nav">
+          <span class="on">Home</span><span>Learn</span><span>Meditate</span><span>Teacher</span><span>Progress</span>
+        </nav>
+      </div>
+    </div>
+    <ul class="tour-notes">
+      <li><b>Two suns for your two sittings.</b> Tap one when you've sat and it earns its little check. No streaks, no guilt — just today.</li>
+      <li><b>Your mantra, always with you.</b> Assigned the traditional way, kept softly on your home screen.</li>
+      <li><b>One tap to begin.</b> A gong, twenty minutes of silence, a gentle return. The app holds the time so you don't have to.</li>
+      <li><b>A teaching a day.</b> One line of wisdom each morning — never a feed, never a notification storm.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── GONG (tap to hear) ── -->
+<section class="sec sec-center" id="practice">
+  <div class="eyebrow reveal">begin with a gong</div>
+  <div class="gong-stage reveal" id="gongStage" role="button" tabindex="0" aria-label="Play gong sound">
+    <div class="warm"></div>
+    <div class="ripple auto"></div>
+    <div class="ripple auto b"></div>
+    <img class="gong-img" src="gong.png" alt="Brass meditation gong">
+  </div>
+  <div class="tap-hint reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    tap the gong to hear it
+  </div>
+  <h2 class="reveal">One clear note, and the world goes <em>quiet</em>.</h2>
+  <p class="lead reveal">Choose your bell — deep bronze, temple gong, a singing bowl. Its ring opens the session and settles the mind before a single word of mantra.</p>
+</section>
+
+<!-- ── MANTRA ── -->
+<section class="sec sec-center" id="mantra">
+  <div class="eyebrow reveal">a sound, not a word</div>
+  <h2 class="reveal">A mantra of <em>your own</em>.</h2>
+  <div class="mantra-card reveal">
+    <div class="mlabel">from the sixteen traditional sounds</div>
+    <div class="mw" id="mw">SHIRIM</div>
+    <div class="mp" id="mp">shee-rim</div>
+    <div class="mg" id="mg">Very soft, almost whispered — shee, then rim</div>
+  </div>
+  <p class="lead reveal">In the Vedic tradition a mantra is not picked from a list — it is given. The app assigns yours the traditional way, by your stage of life, with a gentle pronunciation guide. It has no meaning to chase. It's a vehicle, and it stays yours.</p>
+</section>
+
+<!-- ── SESSIONS (suns) ── -->
+<section class="sec sec-center">
+  <div class="eyebrow reveal">twice a day</div>
+  <h2 class="reveal">Morning and evening. <em>That's the whole rhythm.</em></h2>
+  <div class="sessions reveal">
+    <div class="session">
+      <div class="mini"><div class="disc"></div></div>
+      <div class="cap"><div class="t">Morning</div><div class="s">before breakfast</div></div>
+    </div>
+    <div class="session">
+      <div class="mini"><div class="disc emb"></div><div class="horizon"></div></div>
+      <div class="cap"><div class="t">Afternoon</div><div class="s">before dinner</div></div>
+    </div>
+  </div>
+  <p class="lead reveal">Two gentle sessions, twenty minutes each. The app keeps the rhythm — and can remind you, morning and afternoon, if you want it to. No streak anxiety, just a warm little record of showing up.</p>
+</section>
+
+<!-- ── LEARN: 6 free lessons ── -->
+<section class="sec sec-center" id="lessons">
+  <div class="eyebrow reveal">the course</div>
+  <h2 class="reveal">Six lessons that teach you <em>everything</em>.</h2>
+  <div class="lessons reveal">
+    <div class="lesson"><span class="ln">01</span><div class="lc"><h4>What Is Vedic Mantra Meditation?</h4><p>The foundation of the technique and why it works.</p></div></div>
+    <div class="lesson"><span class="ln">02</span><div class="lc"><h4>Your Mantra — What It Is and How to Use It</h4><p>Understanding your personal mantra and how to think it.</p></div></div>
+    <div class="lesson"><span class="ln">03</span><div class="lc"><h4>The Complete Meditation Procedure</h4><p>A step-by-step guide for your full twenty-minute session.</p></div></div>
+    <div class="lesson"><span class="ln">04</span><div class="lc"><h4>Understanding Your Experiences</h4><p>Thoughts, sleepiness, sensations — what everything means.</p></div></div>
+    <div class="lesson"><span class="ln">05</span><div class="lc"><h4>The Checking Procedure</h4><p>How to know you are practising it correctly.</p></div></div>
+    <div class="lesson"><span class="ln">06</span><div class="lc"><h4>Building a Lasting Daily Practice</h4><p>Regularity, travel, illness, and the gardener principle.</p></div></div>
+  </div>
+  <div class="freepill reveal">✦ all six lessons — free</div>
+  <p class="lead reveal" style="margin-top:26px">A short, unhurried course that teaches the whole practice, start to finish. Every lesson is free — no paywall, no subscription.</p>
+</section>
+
+<!-- ── TEACHER ── -->
+<section class="sec sec-center">
+  <div class="eyebrow reveal">a teacher, always there</div>
+  <h2 class="reveal">Stuck? Just <em>ask</em>.</h2>
+  <div class="panel reveal">
+    <div class="chat-row me">
+      <div class="bubble q">My mind is too busy to meditate.</div>
+    </div>
+    <div class="chat-row">
+      <div class="avatar">
+        <svg viewBox="0 0 200 330" aria-hidden="true"><path d="M64,168 C64,118 136,118 136,168 L166,300 Q168,312 156,312 L44,312 Q32,312 34,300 Z" fill="#fff"/><circle cx="100" cy="66" r="42" fill="#fff"/></svg>
+      </div>
+      <div class="bubble a">That's the most common experience — and it isn't a problem. A busy mind is still a meditating mind. When you notice a thought, you don't fight it. You gently favour the mantra again. That returning <em>is</em> the practice.</div>
+    </div>
+    <div class="chips">
+      <span class="chip">I keep falling asleep</span>
+      <span class="chip">How do I know it's working?</span>
+      <span class="chip">What if I miss a session?</span>
+    </div>
+  </div>
+  <p class="lead reveal">A patient teacher answers your questions about the practice in plain words — no jargon, no pressure — any time you need one.</p>
+</section>
+
+<!-- ── PROGRESS ── -->
+<section class="sec sec-center">
+  <div class="eyebrow reveal">your days, in colour</div>
+  <h2 class="reveal">Every session, a little <em>warmth</em> added.</h2>
+  <div class="prog-wrap reveal">
+    <div class="streak"><div class="n" id="streakN">42</div><div class="l">days in a row</div></div>
+    <div class="cal" id="cal"></div>
+    <div class="legend" id="legend"></div>
+    <div class="badges">
+      <div class="badge2"><div class="ic" style="background:linear-gradient(135deg,#F0A500,#E07B39)">☀</div><div class="nm">First week</div></div>
+      <div class="badge2"><div class="ic" style="background:linear-gradient(135deg,#C17F3E,#8B6F5E)">☾</div><div class="nm">One month</div></div>
+      <div class="badge2"><div class="ic" style="background:linear-gradient(135deg,#6B9FD4,#B8A0D8)">✦</div><div class="nm">Century</div></div>
+    </div>
+  </div>
+  <p class="lead reveal">Each morning and evening you sit fills a square in your calendar with a warm colour. Weeks of practice become a quiet mosaic — and small milestones mark the way.</p>
+</section>
+
+<!-- ── EVERYTHING INSIDE ── -->
+<section class="sec sec-center">
+  <div class="eyebrow reveal">everything inside</div>
+  <h2 class="reveal">Small app. <em>Whole practice.</em></h2>
+  <div class="grid reveal">
+    <div class="gcell"><h5><i style="background:#F5A623"></i>A mantra of your own</h5><p>Sixteen traditional sounds. Yours is assigned by stage of life, with a soft pronunciation guide.</p></div>
+    <div class="gcell"><h5><i style="background:#C85A3A"></i>Six free lessons</h5><p>The whole technique taught from zero — no paywall, no subscription, no locked chapters.</p></div>
+    <div class="gcell"><h5><i style="background:#db6c2b"></i>A gong to begin</h5><p>Deep bronze, temple gong, or singing bowl. One note to open, one to gently close.</p></div>
+    <div class="gcell"><h5><i style="background:#F0C040"></i>Twenty held minutes</h5><p>A moment to settle, the sitting itself, and a gentle return. The app keeps the time invisibly.</p></div>
+    <div class="gcell"><h5><i style="background:#6B9FD4"></i>Gentle reminders</h5><p>A morning and an afternoon nudge, if you want them. Never pushy, easy to switch off.</p></div>
+    <div class="gcell"><h5><i style="background:#B8A0D8"></i>A teacher to ask</h5><p>Plain-word answers whenever the practice raises questions — day one or day two hundred.</p></div>
+    <div class="gcell"><h5><i style="background:#E07B39"></i>Your days, in colour</h5><p>A warm calendar mosaic of every session, with quiet milestones along the way.</p></div>
+    <div class="gcell"><h5><i style="background:#8B6F5E"></i>Private by design</h5><p>Your practice lives on your phone. Sign in only if you want your progress backed up.</p></div>
+    <div class="gcell"><h5><i style="background:#2c2822"></i>Free, without ads</h5><p>The practice itself is free and always will be. No ads, ever.</p></div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="sec sec-center" id="faq">
+  <div class="eyebrow reveal">questions</div>
+  <h2 class="reveal">Before you <em>begin</em>.</h2>
+  <div class="faq reveal">
+    <details open>
+      <summary>Is it really free?<span class="pm">+</span></summary>
+      <p>Yes. The practice, all six lessons, the teacher, the gongs, your progress — free, with no ads. That's how a meditation practice should arrive.</p>
+    </details>
+    <details>
+      <summary>I've never meditated. Can I start here?<span class="pm">+</span></summary>
+      <p>This is exactly who the app is for. The six lessons assume nothing, teach everything, and the technique itself is effortless — if you can think a thought, you can do this.</p>
+    </details>
+    <details>
+      <summary>What kind of meditation is this?<span class="pm">+</span></summary>
+      <p>Effortless Vedic mantra meditation — an ancient practice where a soft inner sound lets the mind settle on its own. No concentration, no breath control, no effort. Taught simply and independently: no courses to buy, no organisation to join.</p>
+    </details>
+    <details>
+      <summary>What if my mind won't stop thinking?<span class="pm">+</span></summary>
+      <p>Then you're doing it right. Thoughts are part of the process, not a failure. You notice, you gently favour the mantra again, and that quiet returning is the whole skill.</p>
+    </details>
+    <details>
+      <summary>How much time does it take?<span class="pm">+</span></summary>
+      <p>Twenty minutes, twice a day, sitting comfortably with your eyes closed. No cushion, no posture, no incense required. A chair is fine.</p>
+    </details>
+    <details>
+      <summary>Where can I get it?<span class="pm">+</span></summary>
+      <p>On Google Play for Android, free. Sit down, close your eyes, and start.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ── TODAY'S TEACHING ── -->
+<section class="teaching">
+  <div class="om">ॐ</div>
+  <blockquote id="quote">Take everything as it comes. Neither anticipate nor resist.</blockquote>
+  <div class="label">today's teaching</div>
+</section>
+
+<!-- ── DOWNLOAD ── -->
+<section class="download" id="get">
+  <img class="appmark reveal" src="apple-touch-icon.png" alt="Himalayan Meditation app icon">
+  <div class="h reveal">Begin</div>
+  <p class="p reveal">It's free. Sit down, close your eyes, and start.</p>
+  <a class="play reveal" href="https://play.google.com/store/apps/details?id=app.himalayanmeditation.vedic" target="_blank" rel="noopener">
+    <svg viewBox="0 0 512 512" aria-hidden="true"><path fill="#EA4335" d="M325 256 79 22c-6-6-14-9-22-8l268 268z"/><path fill="#34A853" d="M79 490c-8 1-16-2-22-8l246-234 62 62z"/><path fill="#FBBC04" d="M325 256l63-63 84 48c18 10 18 30 0 40l-84 47z"/><path fill="#4285F4" d="M57 14c-4 5-6 11-6 19v446c0 8 2 14 6 19l246-234z"/></svg>
+    <span class="t"><small>Get it on</small><b>Google Play</b></span>
+  </a>
+  <div class="free reveal">free · android · no ads</div>
+  <a class="coffee reveal" href="https://buymeacoffee.com/wissamsader" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 6h12v6.5A4.5 4.5 0 0 1 11.5 17h-3A4.5 4.5 0 0 1 4 12.5V6z"/>
+      <path d="M16 7.5h1.25A2.75 2.75 0 0 1 20 10.25 2.75 2.75 0 0 1 17.25 13H16v-1.8h1.25a.95.95 0 0 0 .95-.95.95.95 0 0 0-.95-.95H16V7.5z"/>
+      <rect x="3" y="19" width="14" height="1.7" rx=".85"/>
+    </svg>
+    <span>buy me a coffee</span>
+  </a>
+  <div class="coffee-note reveal">the app is free — coffee keeps it that way</div>
+</section>
+
+<footer>
+  <div class="brand">Himalayan</div>
+  <div>A Vedic mantra practice</div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* nav background after scroll */
+  const nav = document.getElementById('topnav');
+  const onNav = () => nav.classList.toggle('scrolled', scrollY > 40);
+  addEventListener('scroll', onNav, {passive:true}); onNav();
+
+  /* reveals */
+  const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* mantra card — real sounds from the app, rotating */
+  const MANTRAS = [
+    ['ENG','eng','Like "sing" without the s — a soft nasal hum'],
+    ['ENGA','eng-ah','Two soft syllables — eng then ah'],
+    ['SHIRIM','shee-rim','Very soft, almost whispered — shee, then rim'],
+    ['KIRING','kee-ring','Kee flows into ring softly'],
+    ['HRIM','hreem','The H is barely audible — a breathy hreem'],
+    ['SHAMA','shah-mah','Two gentle syllables — shah, then mah'],
+  ];
+  const mw=document.getElementById('mw'), mp=document.getElementById('mp'), mg=document.getElementById('mg');
+  let mi=2;
+  if(!reduce) setInterval(()=>{
+    [mw,mp,mg].forEach(el=>el.style.opacity=0);
+    setTimeout(()=>{
+      mi=(mi+1)%MANTRAS.length;
+      const [w,p,g]=MANTRAS[mi];
+      mw.textContent=w; mp.textContent=p; mg.textContent=g;
+      [mw,mp,mg].forEach(el=>el.style.opacity=1);
+    },520);
+  },4600);
+
+  /* gong: play the real app gong sound (Web Audio) + strike animation on click */
+  const stage = document.getElementById('gongStage');
+  let rawGong = null, actx = null, gongBuf = null;
+  fetch('gong.mp3').then(r=>r.arrayBuffer()).then(b=>{rawGong=b}).catch(()=>{});
+  function playGong(){
+    try{
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return;
+      if(!actx) actx = new AC();
+      if(actx.state==='suspended') actx.resume();
+      const fire = ()=>{
+        if(!gongBuf) return;
+        const s = actx.createBufferSource(); s.buffer = gongBuf;
+        const g = actx.createGain(); g.gain.value = 0.9;
+        s.connect(g); g.connect(actx.destination); s.start(0);
+      };
+      if(gongBuf){ fire(); return; }
+      if(rawGong){ actx.decodeAudioData(rawGong.slice(0)).then(buf=>{gongBuf=buf;fire()}).catch(()=>{}); }
+    }catch(e){}
+  }
+  function strike(){
+    playGong();
+    stage.classList.add('struck');
+    setTimeout(()=>stage.classList.remove('struck'),140);
+    const r = document.createElement('div');
+    r.className='strike'; stage.appendChild(r);
+    requestAnimationFrame(()=>r.classList.add('go'));
+    setTimeout(()=>r.remove(),1700);
+  }
+  stage.addEventListener('click',strike);
+  stage.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();strike()}});
+
+  /* progress calendar — 7 cols x 12 weeks, cells styled EXACTLY like the app */
+  const cal = document.getElementById('cal');
+  const COLORS = ['#F5A623','#C85A3A','#6B9FD4','#B8A0D8','#F0C040'];
+  const glow = c => `radial-gradient(circle at center, ${c}dd 0%, ${c}66 50%, transparent 80%)`;
+  const half = c => `conic-gradient(from 180deg, ${c}cc 0deg, ${c}44 180deg, rgba(26,26,26,0.06) 180deg, rgba(26,26,26,0.06) 360deg)`;
+  const TOTAL = 84, TODAY = 80;   // 12 weeks; "today" near the end
+  let ci = 0;
+  for(let i=0;i<TOTAL;i++){
+    const cell=document.createElement('div'); cell.className='cell';
+    let status;
+    if(i>TODAY) status='future';
+    else if(i<5) status=['empty','partial','full','empty','full'][i];
+    else if((i*3)%17===0) status='partial';
+    else if((i*7)%23===0) status='empty';
+    else status='full';
+    let bg, op='1';
+    if(status==='full'){ bg=glow(COLORS[ci++%COLORS.length]); }
+    else if(status==='partial'){ bg=half(COLORS[ci++%COLORS.length]); }
+    else if(status==='future'){ bg='rgba(26,26,26,0.02)'; op='0.5'; }
+    else { bg='rgba(26,26,26,0.04)'; }
+    if(i===TODAY) cell.style.border='2px solid #F5A623';
+    cell.style.background=bg; cell.style.opacity=op;
+    cal.appendChild(cell);
+  }
+  /* legend — 5 palette dots + "no session", like the app */
+  const legend=document.getElementById('legend');
+  COLORS.forEach(c=>{ const s=document.createElement('span'); s.className='ld'; s.style.background=glow(c); legend.appendChild(s); });
+  const grp=document.createElement('span'); grp.className='grp';
+  const e=document.createElement('span'); e.className='ld'; e.style.background='rgba(26,26,26,0.10)';
+  grp.appendChild(e); grp.appendChild(document.createTextNode('no session'));
+  legend.appendChild(grp);
+
+  /* today's teaching — app's own quotes, unattributed, rotating */
+  const QUOTES = [
+    'Take everything as it comes. Neither anticipate nor resist.',
+    'Rest is the basis of activity. The deeper the rest, the more dynamic the activity.',
+    'A thought is not an interruption. The return to the mantra is the practice itself.',
+    'The mind is like an ocean. On the surface there are waves, but deep within is silence.',
+    'There is no such thing as a bad meditation. Every session serves its purpose.',
+    'Do not judge your meditation. A restless session is as valuable as a still one.',
+    'Happiness radiates from within. It is not something to be acquired from the outside.',
+    'We do not pursue silence. We allow the mind to settle and silence reveals itself.',
+    'The gardener does not pull on the plant to make it grow. He waters it and waits.',
+    'Meditation is not an escape. It is a return — to your own nature.',
+  ];
+  const quote = document.getElementById('quote');
+  let qi = 0, rotating=false, tid=null;
+  const qIO = new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting && !rotating){
+      rotating=true;
+      tid=setInterval(()=>{
+        qi=(qi+1)%QUOTES.length;
+        quote.style.opacity=0;
+        setTimeout(()=>{quote.textContent=QUOTES[qi];quote.style.opacity=1},700);
+      },5200);
+    } else if(!e.isIntersecting && rotating){rotating=false;clearInterval(tid)}
+  }),{threshold:.5});
+  qIO.observe(document.querySelector('.teaching'));
+})();
+</script>
+</body>
+</html>
