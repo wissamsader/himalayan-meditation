@@ -121,12 +121,9 @@ a{color:inherit;text-decoration:none}
 .wordmark .m{font-size:clamp(.82rem,2vw,1.1rem);font-weight:300;letter-spacing:.6em;text-transform:uppercase;color:var(--muted);padding-left:.6em;margin-top:14px}
 .hero .sub{position:relative;z-index:2;font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(1.05rem,2.3vw,1.45rem);color:var(--brown);max-width:30ch;margin:28px auto 34px}
 .hero .actions{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:14px}
-.play{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--cream);padding:15px 30px;border-radius:999px;box-shadow:0 20px 44px -18px rgba(44,40,34,.6);transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
-.play:hover{transform:translateY(-3px);box-shadow:0 30px 54px -18px rgba(44,40,34,.5)}
-.play svg{width:22px;height:22px}
-.play .t{text-align:left;line-height:1.15}
-.play .t small{display:block;font-size:8px;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
-.play .t b{font-weight:500;font-size:16px;letter-spacing:.03em}
+.play{display:inline-block;line-height:0;margin:-13px;filter:drop-shadow(0 20px 30px rgba(44,40,34,.45));transition:transform .4s cubic-bezier(.16,1,.3,1),filter .4s}
+.play:hover{transform:translateY(-3px);filter:drop-shadow(0 28px 38px rgba(44,40,34,.4))}
+.play img{display:block;height:78px;width:auto}
 .hero .free{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
 .scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px}
 .scrollcue .dot{width:5px;height:5px;border-radius:50%;background:var(--terracotta);animation:sink 2.6s ease-in-out infinite}
@@ -406,8 +403,7 @@ footer a:hover{color:var(--terracotta)}
   <p class="sub">A mantra of your own. Twenty minutes of stillness, morning and evening.</p>
   <div class="actions">
     <a class="play" href="https://play.google.com/store/apps/details?id=app.himalayanmeditation.vedic" target="_blank" rel="noopener">
-      <svg viewBox="0 0 512 512" aria-hidden="true"><path fill="#EA4335" d="M325 256 79 22c-6-6-14-9-22-8l268 268z"/><path fill="#34A853" d="M79 490c-8 1-16-2-22-8l246-234 62 62z"/><path fill="#FBBC04" d="M325 256l63-63 84 48c18 10 18 30 0 40l-84 47z"/><path fill="#4285F4" d="M57 14c-4 5-6 11-6 19v446c0 8 2 14 6 19l246-234z"/></svg>
-      <span class="t"><small>Get it on</small><b>Google Play</b></span>
+      <img src="google-play-badge.png" alt="Get it on Google Play" width="646" height="250">
     </a>
     <a class="coffee" href="https://buymeacoffee.com/wissamsader" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -642,8 +638,7 @@ footer a:hover{color:var(--terracotta)}
   <div class="h reveal">Begin</div>
   <p class="p reveal">It's free. Sit down, close your eyes, and start.</p>
   <a class="play reveal" href="https://play.google.com/store/apps/details?id=app.himalayanmeditation.vedic" target="_blank" rel="noopener">
-    <svg viewBox="0 0 512 512" aria-hidden="true"><path fill="#EA4335" d="M325 256 79 22c-6-6-14-9-22-8l268 268z"/><path fill="#34A853" d="M79 490c-8 1-16-2-22-8l246-234 62 62z"/><path fill="#FBBC04" d="M325 256l63-63 84 48c18 10 18 30 0 40l-84 47z"/><path fill="#4285F4" d="M57 14c-4 5-6 11-6 19v446c0 8 2 14 6 19l246-234z"/></svg>
-    <span class="t"><small>Get it on</small><b>Google Play</b></span>
+    <img src="google-play-badge.png" alt="Get it on Google Play" width="646" height="250">
   </a>
   <div class="free reveal">free · android · no ads</div>
   <a class="coffee reveal" href="https://buymeacoffee.com/wissamsader" target="_blank" rel="noopener">
