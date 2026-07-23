@@ -31,20 +31,20 @@
   "installUrl": "https://play.google.com/store/apps/details?id=app.himalayanmeditation.vedic"
 }
 </script>
-<meta name="theme-color" content="#F1EADD">
+<meta name="theme-color" content="#2e2b29">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --cream:#F1EADD; --gold:#F5A623; --amber:#f3982e; --terracotta:#C85A3A; --burnt:#db6c2b;
+  --cream:#2e2b29; --gold:#e5ae4f; --amber:#e5ae4f; --terracotta:#C85A3A; --burnt:#db6c2b;
   --blue:#6B9FD4; --lavender:#B8A0D8; --yellow:#F0C040;
-  --ink:#2c2822; --ink-soft:#4a453d; --muted:#8a8172; --brown:#8B6F5E;
-  --line:rgba(44,40,34,.10);
-  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
-  --serif:'Newsreader',Georgia,serif;
+  --ink:#efe6da; --ink-soft:#d5cbbd; --muted:#8f867c; --brown:#c9beb0;
+  --line:rgba(239,230,218,.09);
+  --sans:'Space Mono',monospace;
+  --serif:'Playfair Display',Georgia,serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 .gong-stage,.gong-img,.topnav a,.coffee,.play,button,[role="button"]{-webkit-user-select:none;user-select:none}
@@ -62,16 +62,15 @@ a{color:inherit;text-decoration:none}
 /* ── full, warm background wash (fills the whole frame — no empty cream) ── */
 .bg{position:fixed;inset:0;z-index:-2;
   background:
-    radial-gradient(58vw 58vw at 10% 4%, rgba(245,166,35,.30), transparent 62%),
-    radial-gradient(52vw 52vw at 96% 22%, rgba(200,90,58,.22), transparent 60%),
-    radial-gradient(60vw 60vw at 84% 96%, rgba(184,160,216,.30), transparent 62%),
-    radial-gradient(50vw 50vw at 14% 92%, rgba(240,192,64,.24), transparent 60%),
-    radial-gradient(46vw 46vw at 54% 52%, rgba(233,150,138,.14), transparent 60%),
-    linear-gradient(168deg,#F4EEE3 0%,#F0E7D9 46%,#ECDFE4 100%);
+    radial-gradient(58vw 58vw at 10% 4%, rgba(229,174,79,.10), transparent 62%),
+    radial-gradient(52vw 52vw at 96% 22%, rgba(200,90,58,.08), transparent 60%),
+    radial-gradient(60vw 60vw at 84% 96%, rgba(184,160,216,.10), transparent 62%),
+    radial-gradient(50vw 50vw at 14% 92%, rgba(229,174,79,.07), transparent 60%),
+    linear-gradient(168deg,#2e2b29 0%,#2c2927 46%,#2a2725 100%);
   animation:bgShift 26s ease-in-out infinite;
 }
 @keyframes bgShift{0%,100%{filter:hue-rotate(-8deg) saturate(1)}50%{filter:hue-rotate(10deg) saturate(1.08)}}
-.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;mix-blend-mode:soft-light;
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.4;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 /* ── top bar ── */
@@ -81,7 +80,7 @@ a{color:inherit;text-decoration:none}
   border-bottom:1px solid transparent;
   transition:background .45s,border-color .45s,backdrop-filter .45s;
 }
-.topnav.scrolled{background:rgba(243,237,226,.72);border-bottom-color:var(--line);
+.topnav.scrolled{background:rgba(46,43,41,.78);border-bottom-color:var(--line);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .topnav .brand{display:flex;align-items:center;gap:11px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink)}
 .topnav .brand img{width:27px;height:27px;border-radius:8px;box-shadow:0 4px 12px -4px rgba(90,55,20,.4)}
@@ -103,13 +102,13 @@ a{color:inherit;text-decoration:none}
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14vh 24px 8vh}
 .sun-halo{position:absolute;top:34%;left:50%;transform:translate(-50%,-50%);width:min(78vh,640px);aspect-ratio:1;z-index:0;pointer-events:none}
 .sun-halo .glow{position:absolute;inset:0;border-radius:50%;
-  background:radial-gradient(circle,rgba(245,166,35,.52),rgba(240,150,90,.2) 40%,transparent 68%);
+  background:radial-gradient(circle,rgba(229,174,79,.26),rgba(240,150,90,.10) 40%,transparent 68%);
   animation:pulse 8s ease-in-out infinite}
 /* the icon's aura — warm red left, lavender right */
 .sun-halo .g2{position:absolute;left:-4%;top:36%;width:56%;height:56%;border-radius:50%;
-  background:radial-gradient(circle,rgba(200,90,58,.30),transparent 66%);animation:pulse 9.5s ease-in-out 1.2s infinite}
+  background:radial-gradient(circle,rgba(200,90,58,.16),transparent 66%);animation:pulse 9.5s ease-in-out 1.2s infinite}
 .sun-halo .g3{position:absolute;right:-4%;top:42%;width:56%;height:56%;border-radius:50%;
-  background:radial-gradient(circle,rgba(184,160,216,.36),transparent 66%);animation:pulse 10.5s ease-in-out 2.1s infinite}
+  background:radial-gradient(circle,rgba(184,160,216,.20),transparent 66%);animation:pulse 10.5s ease-in-out 2.1s infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
 
 .figure-wrap{position:relative;z-index:2;margin-bottom:44px}
@@ -138,9 +137,10 @@ a{color:inherit;text-decoration:none}
 
 /* ── app tour (phone) ── */
 .tour{display:flex;gap:clamp(34px,6vw,84px);align-items:center;justify-content:center;margin-top:7vh;flex-wrap:wrap}
-.phone{flex:0 0 auto;width:296px;border-radius:48px;border:9px solid #262019;background:#262019;
-  box-shadow:0 60px 100px -44px rgba(70,45,15,.6),0 26px 52px -30px rgba(70,45,15,.42)}
-.screen{position:relative;border-radius:39px;overflow:hidden;background:#F0EBE1;padding:30px 22px 0;height:604px;display:flex;flex-direction:column;text-align:left}
+.phone{flex:0 0 auto;width:296px;border-radius:48px;border:9px solid #17150f;background:#17150f;
+  box-shadow:0 60px 100px -44px rgba(0,0,0,.7),0 26px 52px -30px rgba(0,0,0,.5)}
+.screen{position:relative;border-radius:39px;overflow:hidden;background:#2e2b29}
+.screen img{width:100%;display:block}
 .screen > *{position:relative}
 /* home screen, exactly as the app's current build */
 .ph-gear{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.45);
@@ -226,8 +226,8 @@ a{color:inherit;text-decoration:none}
 
 /* ── mantra card ── */
 .mantra-card{position:relative;width:100%;max-width:440px;margin:6vh auto 3vh;padding:42px 30px 38px;text-align:center;
-  background:rgba(255,253,249,.72);border:1px solid rgba(255,255,255,.7);border-radius:26px;
-  box-shadow:0 30px 70px -30px rgba(120,80,30,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  background:rgba(56,52,49,.66);border:1px solid rgba(239,230,218,.1);border-radius:26px;
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .mantra-card .mlabel{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
 .mantra-card .mw{font-size:clamp(2rem,6vw,2.7rem);font-weight:300;letter-spacing:.34em;color:var(--ink);padding-left:.34em;line-height:1.2;transition:opacity .5s}
 .mantra-card .mp{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--terracotta);margin-top:10px;transition:opacity .5s}
@@ -248,7 +248,7 @@ a{color:inherit;text-decoration:none}
 .session .cap .s{font-size:12px;color:var(--muted);margin-top:3px}
 
 /* ── teacher chat mockup ── */
-.panel{width:100%;max-width:520px;background:rgba(255,253,249,.72);border:1px solid rgba(255,255,255,.7);
+.panel{width:100%;max-width:520px;background:rgba(56,52,49,.66);border:1px solid rgba(239,230,218,.1);
   border-radius:26px;padding:26px;margin:6vh 0 2vh;text-align:left;
   box-shadow:0 30px 70px -30px rgba(120,80,30,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .chat-row{display:flex;gap:12px;margin-bottom:18px;align-items:flex-end}
@@ -257,8 +257,8 @@ a{color:inherit;text-decoration:none}
   background:radial-gradient(circle at 50% 35%,#f6b45e,#db6c2b);box-shadow:0 6px 16px -6px rgba(219,108,43,.7)}
 .avatar svg{width:22px;height:auto}
 .bubble{padding:13px 16px;border-radius:18px;font-size:14px;line-height:1.6;max-width:78%}
-.bubble.q{background:var(--ink);color:#f3ede2;border-bottom-right-radius:5px}
-.bubble.a{background:#fff;color:var(--ink-soft);border-bottom-left-radius:5px;box-shadow:0 6px 20px -10px rgba(120,80,30,.4)}
+.bubble.q{background:#efe6da;color:#2e2b29;border-bottom-right-radius:5px}
+.bubble.a{background:rgba(46,43,41,.85);color:var(--ink-soft);border-bottom-left-radius:5px;border:1px solid rgba(239,230,218,.08)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .chip{font-size:12px;color:var(--brown);background:rgba(200,90,58,.08);border:1px solid rgba(200,90,58,.18);border-radius:999px;padding:7px 13px}
 
@@ -289,7 +289,7 @@ a{color:inherit;text-decoration:none}
 
 /* ── feature grid ── */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);width:100%;max-width:960px;margin:7vh auto 0;
-  border:1px solid var(--line);border-radius:24px;overflow:hidden;background:rgba(255,253,249,.44)}
+  border:1px solid var(--line);border-radius:24px;overflow:hidden;background:rgba(56,52,49,.5)}
 .gcell{padding:28px 27px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-align:left}
 .gcell:nth-child(3n){border-right:0}
 .gcell:nth-child(n+7){border-bottom:0}
@@ -390,10 +390,10 @@ footer a:hover{color:var(--terracotta)}
 <header class="hero" id="top">
   <div class="sun-halo"><div class="glow"></div><div class="g2"></div><div class="g3"></div></div>
   <div class="figure-wrap">
-    <svg viewBox="0 0 200 330" aria-label="Meditating figure">
-      <path d="M64,168 C64,118 136,118 136,168 L166,300 Q168,312 156,312 L44,312 Q32,312 34,300 Z" fill="#1c1a17"/>
-      <circle cx="100" cy="66" r="42" fill="#1c1a17"/>
-      <ellipse cx="100" cy="258" rx="33" ry="12" fill="#d7d1c4" opacity="0.9"/>
+    <svg viewBox="0 0 200 200" aria-label="The full moon — the app's mark">
+      <path d="M42 100 a58 58 0 0 1 116 0 Z" fill="#e5ae4f"/>
+      <path d="M42 100 a58 58 0 0 0 116 0 Z" fill="rgba(150,104,44,.45)"/>
+      <line x1="6" y1="100" x2="194" y2="100" stroke="#e5ae4f" stroke-width="2" opacity=".9"/>
     </svg>
   </div>
   <div class="wordmark">
@@ -425,50 +425,14 @@ footer a:hover{color:var(--terracotta)}
   <div class="tour reveal">
     <div class="phone" aria-label="Himalayan Meditation app home screen">
       <div class="screen">
-        <div class="ph-gear"><svg viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
-        <div class="ph-hero">
-          <div class="ph-aura"></div>
-          <svg class="ph-fig" viewBox="0 0 200 330" aria-hidden="true">
-            <ellipse cx="47" cy="311" rx="13" ry="9" fill="#0d0d0f"/>
-            <ellipse cx="153" cy="311" rx="13" ry="9" fill="#0d0d0f"/>
-            <path d="M64,168 C64,118 136,118 136,168 L166,300 Q168,312 156,312 L44,312 Q32,312 34,300 Z" fill="#0d0d0f"/>
-            <ellipse cx="100" cy="252" rx="38" ry="21" fill="#b9bcc2"/>
-            <circle cx="100" cy="66" r="42" fill="#0d0d0f"/>
-          </svg>
-        </div>
-        <div class="ph-eyebrow">Today's sessions</div>
-        <div class="ph-suns">
-          <div class="ph-sun done">
-            <div class="pm-mini">
-              <div class="pm-rays"></div><div class="pm-sun"></div>
-              <span class="pm-badge"><svg viewBox="0 0 14 14"><path d="M3.5 7.3 l2.3 2.3 l4.7 -5.3"/></svg></span>
-            </div>
-            <div class="pm-cap"><b>Morning</b><small>Before breakfast</small></div>
-          </div>
-          <div class="ph-sun">
-            <div class="pm-mini">
-              <span class="pm-halo"></span><div class="pm-sun emb"></div><div class="pm-line"></div>
-            </div>
-            <div class="pm-cap"><b>Afternoon</b><small>Before dinner</small></div>
-          </div>
-        </div>
-        <div class="ph-chev"><svg viewBox="0 0 44 26"><path d="M10 8 L22 19 L34 8"/></svg><span>tap a sun when done</span></div>
-        <div class="ph-label">Begin</div>
-        <div class="ph-begin"><span class="txt">20-Minute<br>Session <span class="arr">→</span></span></div>
-        <div class="ph-label">Your mantra</div>
-        <div class="ph-mantra"><span class="txt">IENGA</span></div>
-        <div class="ph-label">Today's teaching</div>
-        <div class="ph-quote">"The kingdom of Heaven is within you."</div>
-        <nav class="ph-nav">
-          <span class="on">Home</span><span>Learn</span><span>Meditate</span><span>Teacher</span><span>Progress</span>
-        </nav>
+        <img src="app-home.jpg" alt="The app's home screen — the sun resting on its horizon line" loading="lazy">
       </div>
     </div>
     <ul class="tour-notes">
-      <li><b>Two suns for your two sittings.</b> Tap one when you've sat and it earns its little check. No streaks, no guilt — just today.</li>
-      <li><b>Your mantra, always with you.</b> Assigned the traditional way, kept softly on your home screen.</li>
-      <li><b>One tap to begin.</b> A gong, twenty minutes of silence, a gentle return. The app holds the time so you don't have to.</li>
-      <li><b>A teaching a day.</b> One line of wisdom each morning — never a feed, never a notification storm.</li>
+      <li><b>The day lives on one line.</b> A small sun travels the horizon in real time. Tap it — or the dots at each end — and your morning and evening sits light up in their own colours.</li>
+      <li><b>Begin is the sun itself.</b> Tap it and it becomes the timer: a breathing sun with your mantra pulsing inside, a gong to open and to close.</li>
+      <li><b>The whole app follows the day.</b> Gold at dawn, coral at midday, lavender at dusk, purple at night — every screen re-tunes as the hours pass.</li>
+      <li><b>A teaching a day.</b> One line of wisdom under the horizon — never a feed, never a notification storm.</li>
     </ul>
   </div>
 </section>
@@ -573,7 +537,7 @@ footer a:hover{color:var(--terracotta)}
       <div class="badge2"><div class="ic" style="background:linear-gradient(135deg,#6B9FD4,#B8A0D8)">✦</div><div class="nm">Century</div></div>
     </div>
   </div>
-  <p class="lead reveal">Each morning and evening you sit fills a square in your calendar with a warm colour. Weeks of practice become a quiet mosaic — and small milestones mark the way.</p>
+  <p class="lead reveal">Each morning and evening you sit lights a little circle in your year with a warm colour. Months of practice become a quiet constellation — and small milestones mark the way.</p>
 </section>
 
 <!-- ── EVERYTHING INSIDE ── -->
@@ -584,12 +548,12 @@ footer a:hover{color:var(--terracotta)}
     <div class="gcell"><h5><i style="background:#F5A623"></i>A mantra of your own</h5><p>Sixteen traditional sounds. Yours is assigned by stage of life, with a soft pronunciation guide.</p></div>
     <div class="gcell"><h5><i style="background:#C85A3A"></i>Six free lessons</h5><p>The whole technique taught from zero — no paywall, no subscription, no locked chapters.</p></div>
     <div class="gcell"><h5><i style="background:#db6c2b"></i>A gong to begin</h5><p>Deep bronze, temple gong, or singing bowl. One note to open, one to gently close.</p></div>
-    <div class="gcell"><h5><i style="background:#F0C040"></i>Twenty held minutes</h5><p>A moment to settle, the sitting itself, and a gentle return. The app keeps the time invisibly.</p></div>
+    <div class="gcell"><h5><i style="background:#F0C040"></i>Minutes that fit you</h5><p>Five to sixty minutes — you choose. A moment to settle, the sitting itself, and a gentle return.</p></div>
     <div class="gcell"><h5><i style="background:#6B9FD4"></i>Gentle reminders</h5><p>A morning and an afternoon nudge, if you want them. Never pushy, easy to switch off.</p></div>
     <div class="gcell"><h5><i style="background:#B8A0D8"></i>A teacher to ask</h5><p>Plain-word answers whenever the practice raises questions — day one or day two hundred.</p></div>
     <div class="gcell"><h5><i style="background:#E07B39"></i>Your days, in colour</h5><p>A warm calendar mosaic of every session, with quiet milestones along the way.</p></div>
     <div class="gcell"><h5><i style="background:#8B6F5E"></i>Private by design</h5><p>Your practice lives on your phone. Sign in only if you want your progress backed up.</p></div>
-    <div class="gcell"><h5><i style="background:#2c2822"></i>Free, without ads</h5><p>The practice itself is free and always will be. No ads, ever.</p></div>
+    <div class="gcell"><h5><i style="background:#efe6da"></i>Free, without ads</h5><p>The practice itself is free and always will be. No ads, ever.</p></div>
   </div>
 </section>
 
